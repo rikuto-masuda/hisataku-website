@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hisataku - Portfolio</title>
+    <meta name="description" content="関西学院大学4年生ヒサタクの自己紹介ポートフォリオサイト">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,26 +32,40 @@
     <section id="hero" class="hero">
         <div class="hero-bg-decoration"></div>
         <div class="hero-bg-decoration-2"></div>
-        <div class="hero-content">
-            <div class="hero-image">
-                <img src="images/hisataku-photo.jpg" alt="Hisataku" class="profile-image">
-            </div>
-            <div class="hero-text">
-                <p class="hero-catchphrase">スポンジのように、<br>全てを吸収し、<br>未来を創造する。</p>
-                <h1 class="hero-name">Hisataku</h1>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-catchcopy">
+                        スポンジのように、<br>
+                        全てを吸収し、<br>
+                        未来を創造する。
+                    </h1>
+                    <div class="hero-name">
+                        <p class="nickname">Hisataku</p>
+                        <div class="fullname">
+                            <p class="kanji">久松 拓哉</p>
+                            <p class="furigana">ひさまつ たくや</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-image">
+                        <img src="images/hisataku-photo.jpg" alt="久松拓哉のプロフィール写真">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About セクション -->
     <section id="about" class="about section">
+        <div class="section-bg-decoration"></div>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">About</h2>
                 <p class="section-subtitle">私について</p>
             </div>
             <div class="about-content">
-                <div class="about-bg-decoration"></div>
                 <div class="about-text">
                     <p class="about-intro">
                         経営者/教育者を目指す、関西学院大学4年生のヒサタクです。<br>
@@ -71,39 +91,53 @@
             </div>
             <div class="works-grid">
                 <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-tv"></i>
+                    <div class="work-image">
+                        <img src="images/D2B0170F-4E9C-486D-8227-C1AE45538404.jpg" alt="メディア出演">
                     </div>
-                    <h3 class="work-title">メディア出演</h3>
-                    <p class="work-description">J-tubeレポーター / ラジオ出演</p>
-                </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-briefcase"></i>
+                    <div class="work-content">
+                        <h3 class="work-title">メディア出演</h3>
+                        <p class="work-description">J-tubeレポーター / ラジオ出演</p>
                     </div>
-                    <h3 class="work-title">ビジネス経験</h3>
-                    <p class="work-description">30人規模の人材紹介ビジネス</p>
                 </div>
+                
                 <div class="work-card">
-                    <div class="work-icon">
+                    <div class="work-image business-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h3 class="work-title">コミュニティ運営</h3>
-                    <p class="work-description">年間約50日開催のホームパーティー主催</p>
-                </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-handshake"></i>
+                    <div class="work-content">
+                        <h3 class="work-title">ビジネス経験</h3>
+                        <p class="work-description">30人規模の人材紹介ビジネス</p>
                     </div>
-                    <h3 class="work-title">企業連携</h3>
-                    <p class="work-description">企業のビデオ制作にてタレント・コンサルタントとして活動</p>
                 </div>
+                
                 <div class="work-card">
-                    <div class="work-icon">
+                    <div class="work-image">
+                        <img src="images/コミュニティ.jpg" alt="コミュニティ運営">
+                    </div>
+                    <div class="work-content">
+                        <h3 class="work-title">コミュニティ運営</h3>
+                        <p class="work-description">年間約50日開催のホームパーティー主催</p>
+                    </div>
+                </div>
+                
+                <div class="work-card">
+                    <div class="work-image">
+                        <img src="images/起業連携.jpg" alt="企業連携">
+                    </div>
+                    <div class="work-content">
+                        <h3 class="work-title">企業連携</h3>
+                        <p class="work-description">企業のビデオ制作にてタレント・コンサルタントとして活動</p>
+                    </div>
+                </div>
+                
+                <div class="work-card">
+                    <div class="work-image academic-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3 class="work-title">学術活動</h3>
-                    <p class="work-description">大学のゼミ長 / 教職課程履修</p>
+                    <div class="work-content">
+                        <h3 class="work-title">学術活動</h3>
+                        <p class="work-description">大学のゼミ長 / 教職課程履修</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,23 +145,21 @@
 
     <!-- Experience セクション -->
     <section id="experience" class="experience section">
+        <div class="section-bg-decoration-2"></div>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Experience</h2>
                 <p class="section-subtitle">多様な経験</p>
             </div>
-            <div class="experience-content">
-                <div class="experience-bg-decoration"></div>
-                <div class="tag-cloud">
-                    <span class="tag">チラシ配り</span>
-                    <span class="tag">ラーメン屋</span>
-                    <span class="tag">新聞配達</span>
-                    <span class="tag">Bagels!販売</span>
-                    <span class="tag">アパレル店員</span>
-                    <span class="tag">ホスト</span>
-                    <span class="tag">枝豆の仕分け</span>
-                    <span class="tag">児童施設スタッフ</span>
-                </div>
+            <div class="experience-tags">
+                <span class="experience-tag">チラシ配り</span>
+                <span class="experience-tag">ラーメン屋</span>
+                <span class="experience-tag">新聞配達</span>
+                <span class="experience-tag">Bagels!販売</span>
+                <span class="experience-tag">アパレル店員</span>
+                <span class="experience-tag">接客業</span>
+                <span class="experience-tag">枝豆の仕分け</span>
+                <span class="experience-tag">児童施設スタッフ</span>
             </div>
         </div>
     </section>
@@ -140,26 +172,14 @@
                 <p class="section-subtitle">連絡先</p>
             </div>
             <div class="contact-content">
-                <div class="contact-bg-decoration"></div>
                 <p class="contact-message">
-                    お仕事のご依頼、ご相談など、<br>お気軽にご連絡ください。
+                    お仕事のご依頼、ご相談など、<br>
+                    お気軽にご連絡ください。
                 </p>
-                <div class="contact-links">
-                    <a href="mailto:contact@hisataku.com" class="contact-link">
-                        <i class="fas fa-envelope"></i>
-                        <span>メールでのお問い合わせ</span>
-                    </a>
-                    <!-- 将来的な拡張用のSNSリンク（コメントアウト）
-                    <a href="#" class="contact-link">
-                        <i class="fab fa-twitter"></i>
-                        <span>Twitter</span>
-                    </a>
-                    <a href="#" class="contact-link">
-                        <i class="fab fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
-                    -->
-                </div>
+                <a href="mailto:hisatakusong@gmail.com" class="contact-email">
+                    <i class="fas fa-envelope"></i>
+                    hisatakusong@gmail.com
+                </a>
             </div>
         </div>
     </section>

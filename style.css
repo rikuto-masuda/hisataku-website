@@ -1,4 +1,4 @@
-/* CSS変数の定義 */
+/* CSS変数定義 */
 :root {
     --base-color: #FFFFFF;
     --text-color: #333333;
@@ -37,18 +37,59 @@ body {
 .section {
     padding: 100px 0;
     position: relative;
-}
-
-/* アニメーション用クラス */
-.fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
 }
 
-.fade-in.visible {
+.section.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+/* 背景装飾 */
+.section-bg-decoration {
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, var(--accent-color-1) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.section-bg-decoration-2 {
+    position: absolute;
+    bottom: 20%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(45deg, var(--accent-color-2) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    z-index: -1;
 }
 
 /* ヘッダー */
@@ -57,19 +98,12 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1000;
     padding: 20px 0;
     transition: all 0.3s ease;
-}
-
-.nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 .nav-list {
@@ -83,7 +117,7 @@ body {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1.1rem;
     transition: color 0.3s ease;
     position: relative;
 }
@@ -109,10 +143,9 @@ body {
 
 /* メインビジュアル */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
     overflow: hidden;
 }
@@ -120,332 +153,356 @@ body {
 .hero-bg-decoration {
     position: absolute;
     top: 10%;
-    right: 10%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, var(--accent-color-1) 0%, transparent 70%);
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, var(--accent-color-1) 0%, transparent 60%);
     border-radius: 50%;
-    opacity: 0.3;
-    filter: blur(40px);
-    animation: float 6s ease-in-out infinite;
+    filter: blur(100px);
+    opacity: 0.4;
+    z-index: -1;
 }
 
 .hero-bg-decoration-2 {
     position: absolute;
-    bottom: 20%;
-    left: 15%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, var(--accent-color-2) 0%, transparent 70%);
+    bottom: 10%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(45deg, var(--accent-color-2) 0%, transparent 60%);
     border-radius: 50%;
-    opacity: 0.4;
-    filter: blur(30px);
-    animation: float 8s ease-in-out infinite reverse;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: -1;
 }
 
 .hero-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
     align-items: center;
-    gap: 80px;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
+    width: 100%;
+}
+
+.hero-catchcopy {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+}
+
+.nickname {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.fullname {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.kanji {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.furigana {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
 }
 
 .hero-image {
-    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .profile-image {
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid rgba(178, 221, 230, 0.3);
+    overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.hero-text {
-    flex: 1;
+.profile-image:hover {
+    transform: scale(1.05);
 }
 
-.hero-catchphrase {
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1.4;
-    margin-bottom: 30px;
-    color: var(--text-color);
-}
-
-.hero-name {
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--text-color);
-    letter-spacing: 2px;
-}
-
-/* セクションヘッダー */
-.section-header {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.section-title {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-
-.section-subtitle {
-    font-size: 16px;
-    color: #666;
-    font-weight: 400;
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* About セクション */
-.about {
-    background: var(--base-color);
-    position: relative;
-}
-
-.about-bg-decoration {
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(135deg, var(--accent-color-2) 0%, transparent 70%);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    opacity: 0.2;
-    filter: blur(20px);
-}
-
 .about-content {
     max-width: 800px;
     margin: 0 auto;
-    position: relative;
 }
 
-.about-text p {
-    font-size: 18px;
+.about-text {
+    font-size: 1.1rem;
     line-height: 1.8;
-    margin-bottom: 30px;
 }
 
 .about-intro {
-    font-size: 20px;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: var(--text-color);
+}
+
+.about-story {
+    margin-bottom: 30px;
+}
+
+.about-motto {
+    margin-bottom: 0;
 }
 
 .about-motto strong {
     color: var(--text-color);
     font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Works セクション */
-.works {
-    background: #fafafa;
-}
-
 .works-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: 30px;
 }
 
 .work-card {
     background: var(--base-color);
-    padding: 40px 30px;
     border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .work-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-.work-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
-    border-radius: 50%;
+.work-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.work-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.work-card:hover .work-image img {
+    transform: scale(1.1);
+}
+
+.business-icon,
+.academic-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
 }
 
-.work-icon i {
-    font-size: 32px;
+.business-icon i,
+.academic-icon i {
+    font-size: 3rem;
     color: var(--base-color);
 }
 
+.work-content {
+    padding: 30px;
+}
+
 .work-title {
-    font-size: 20px;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    color: var(--text-color);
+    margin-bottom: 10px;
 }
 
 .work-description {
-    font-size: 16px;
     color: #666;
     line-height: 1.6;
 }
 
 /* Experience セクション */
-.experience {
-    position: relative;
-}
-
-.experience-bg-decoration {
-    position: absolute;
-    top: 30%;
-    right: 10%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(ellipse, var(--accent-color-1) 0%, transparent 70%);
-    border-radius: 50%;
-    opacity: 0.2;
-    filter: blur(25px);
-}
-
-.experience-content {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.tag-cloud {
+.experience-tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 40px 0;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.tag {
+.experience-tag {
     background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
     color: var(--text-color);
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 16px;
+    padding: 15px 25px;
+    border-radius: 50px;
     font-weight: 400;
+    font-size: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
 }
 
-.tag:hover {
+.experience-tag:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.tag:nth-child(odd) {
-    background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-1));
-}
-
 /* Contact セクション */
-.contact {
-    background: #fafafa;
-    position: relative;
-}
-
-.contact-bg-decoration {
-    position: absolute;
-    bottom: 20%;
-    left: 15%;
-    width: 180px;
-    height: 180px;
-    background: linear-gradient(45deg, var(--accent-color-1) 0%, transparent 70%);
-    border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
-    opacity: 0.3;
-    filter: blur(15px);
-}
-
 .contact-content {
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
-    position: relative;
 }
 
 .contact-message {
-    font-size: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
     line-height: 1.8;
-    margin-bottom: 50px;
-    color: var(--text-color);
 }
 
-.contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-.contact-link {
-    display: flex;
+.contact-email {
+    display: inline-flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 30px;
-    background: var(--base-color);
-    border-radius: 50px;
-    text-decoration: none;
+    font-size: 1.3rem;
     color: var(--text-color);
-    font-size: 16px;
-    font-weight: 400;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    padding: 20px 40px;
+    border: 2px solid var(--accent-color-1);
+    border-radius: 50px;
+    transition: all 0.3s ease;
 }
 
-.contact-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.contact-email:hover {
+    background: var(--accent-color-1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.contact-link i {
-    font-size: 20px;
-    color: var(--accent-color-1);
+.contact-email i {
+    font-size: 1.5rem;
 }
 
 /* フッター */
 .footer {
-    background: var(--text-color);
-    color: var(--base-color);
+    background: #f8f9fa;
     padding: 40px 0;
     text-align: center;
 }
 
 .copyright {
-    font-size: 14px;
-    opacity: 0.8;
+    color: #666;
+    font-size: 0.9rem;
 }
 
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
     .nav-list {
         gap: 20px;
     }
     
     .nav-link {
-        font-size: 14px;
+        font-size: 1rem;
     }
     
     .hero-content {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 40px;
         text-align: center;
+    }
+    
+    .hero-catchcopy {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .nickname {
+        font-size: 1.8rem;
+    }
+    
+    .kanji {
+        font-size: 1.3rem;
+    }
+    
+    .profile-image {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .about-text {
+        font-size: 1rem;
+    }
+    
+    .about-intro {
+        font-size: 1.1rem;
+    }
+    
+    .works-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .work-content {
+        padding: 20px;
+    }
+    
+    .experience-tags {
+        gap: 15px;
+    }
+    
+    .experience-tag {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-message {
+        font-size: 1.1rem;
+    }
+    
+    .contact-email {
+        font-size: 1.1rem;
+        padding: 15px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-catchcopy {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
     }
     
     .profile-image {
@@ -453,84 +510,17 @@ body {
         height: 200px;
     }
     
-    .hero-catchphrase {
-        font-size: 22px;
+    .nav-list {
+        gap: 15px;
     }
     
-    .hero-name {
-        font-size: 36px;
+    .nav-link {
+        font-size: 0.9rem;
     }
     
-    .section-title {
-        font-size: 36px;
-    }
-    
-    .section {
-        padding: 60px 0;
-    }
-    
-    .about-text p {
-        font-size: 16px;
-    }
-    
-    .works-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .contact-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .contact-message {
-        font-size: 18px;
-    }
-    
-    .hero-bg-decoration,
-    .hero-bg-decoration-2 {
-        width: 150px;
-        height: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .hero-content {
-        padding: 0 15px;
-    }
-    
-    .profile-image {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .hero-catchphrase {
-        font-size: 18px;
-    }
-    
-    .hero-name {
-        font-size: 28px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-    }
-    
-    .work-card {
-        padding: 30px 20px;
-    }
-    
-    .tag {
-        font-size: 14px;
-        padding: 10px 20px;
-    }
-    
-    .contact-link {
-        padding: 15px 25px;
-        font-size: 14px;
+    .contact-email {
+        font-size: 1rem;
+        padding: 12px 25px;
+        gap: 10px;
     }
 }

@@ -2,21 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // スムーズスクロール機能
-    initSmoothScroll();
-    
-    // スクロールアニメーション機能
-    initScrollAnimations();
-    
-    // ヘッダーのスクロール効果
-    initHeaderScroll();
-    
-});
-
-/**
- * スムーズスクロール機能の初期化
- * ナビゲーションリンクをクリックした際に該当セクションへスムーズにスクロール
- */
-function initSmoothScroll() {
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
@@ -28,7 +13,7 @@ function initSmoothScroll() {
             
             if (targetSection) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20;
                 
                 window.scrollTo({
                     top: targetPosition,
@@ -37,166 +22,132 @@ function initSmoothScroll() {
             }
         });
     });
-}
-
-/**
- * スクロールアニメーション機能の初期化
- * Intersection Observer APIを使用してパフォーマンスを最適化
- */
-function initScrollAnimations() {
-    // アニメーション対象の要素を取得
-    const animationTargets = document.querySelectorAll(
-        '.hero-content, .section-header, .about-content, .work-card, .experience-content, .contact-content'
-    );
     
-    // 各要素にfade-inクラスを追加
-    animationTargets.forEach(target => {
-        target.classList.add('fade-in');
-    });
-    
-    // Intersection Observer のオプション設定
+    // Intersection Observer APIを使用したスクロールアニメーション
     const observerOptions = {
-        threshold: 0.1, // 要素が10%見えたらトリガー
-        rootMargin: '0px 0px -50px 0px' // 下から50px手前でトリガー
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
-    // Observer のコールバック関数
-    const observerCallback = (entries, observer) => {
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // 要素がビューポートに入った時の処理
                 entry.target.classList.add('visible');
-                
-                // 一度アニメーションが実行されたら監視を停止（パフォーマンス向上）
-                observer.unobserve(entry.target);
             }
         });
-    };
+    }, observerOptions);
     
-    // Observer を作成
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    // 監視対象の要素を設定
+    const animatedElements = document.querySelectorAll('.section, .work-card, .experience-tag');
     
-    // 各要素を監視対象に追加
-    animationTargets.forEach(target => {
-        observer.observe(target);
+    animatedElements.forEach(element => {
+        observer.observe(element);
     });
     
-    // Work カードの個別アニメーション（少し遅延を加える）
+    // ワークカードの個別アニメーション
     const workCards = document.querySelectorAll('.work-card');
-    workCards.forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.1}s`;
+    
+    const cardObserver = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100); // 順次表示のための遅延
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
     });
     
-    // タグクラウドの個別アニメーション
-    const tags = document.querySelectorAll('.tag');
-    tags.forEach((tag, index) => {
-        tag.style.transitionDelay = `${index * 0.05}s`;
+    // ワークカードの初期状態設定と監視開始
+    workCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        cardObserver.observe(card);
     });
-}
-
-/**
- * ヘッダーのスクロール効果
- * スクロール位置に応じてヘッダーの透明度を調整
- */
-function initHeaderScroll() {
-    const header = document.querySelector('.header');
+    
+    // エクスペリエンスタグのアニメーション
+    const experienceTags = document.querySelectorAll('.experience-tag');
+    
+    const tagObserver = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }, index * 50); // より短い間隔で順次表示
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    // エクスペリエンスタグの初期状態設定と監視開始
+    experienceTags.forEach(tag => {
+        tag.style.opacity = '0';
+        tag.style.transform = 'translateY(20px) scale(0.9)';
+        tag.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        tagObserver.observe(tag);
+    });
+    
+    // ヘッダーのスクロール時の透明度変更
     let lastScrollTop = 0;
+    const header = document.querySelector('.header');
     
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // スクロール位置に応じてヘッダーの背景透明度を調整
         if (scrollTop > 100) {
             header.style.background = 'rgba(255, 255, 255, 0.95)';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         } else {
             header.style.background = 'rgba(255, 255, 255, 0.9)';
-            header.style.boxShadow = 'none';
         }
         
         lastScrollTop = scrollTop;
     });
-}
-
-/**
- * パフォーマンス最適化のためのスロットル関数
- * 高頻度で発生するイベント（スクロールなど）の処理頻度を制限
- */
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
-/**
- * 追加のインタラクション効果
- * ページ読み込み完了後に実行される追加の効果
- */
-window.addEventListener('load', function() {
-    // ヒーローセクションの初期アニメーション
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.opacity = '0';
-        heroContent.style.transform = 'translateY(30px)';
+    
+    // パフォーマンス最適化：スクロールイベントのスロットリング
+    let ticking = false;
+    
+    function updateScrollEffects() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        setTimeout(() => {
-            heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
-            heroContent.style.opacity = '1';
-            heroContent.style.transform = 'translateY(0)';
-        }, 300);
+        // ヘッダーの背景透明度調整
+        if (scrollTop > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.9)';
+        }
+        
+        ticking = false;
     }
     
-    // プロフィール画像のホバー効果を追加
-    const profileImage = document.querySelector('.profile-image');
-    if (profileImage) {
-        profileImage.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-            this.style.transition = 'transform 0.3s ease';
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+        }
+    });
+    
+    // 初期表示時のヒーローセクションアニメーション
+    setTimeout(() => {
+        const heroElements = document.querySelectorAll('.hero-catchcopy, .hero-name, .profile-image');
+        heroElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 200);
         });
-        
-        profileImage.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-    }
+    }, 300);
+    
+    // ヒーローセクション要素の初期状態設定
+    const heroElements = document.querySelectorAll('.hero-catchcopy, .hero-name, .profile-image');
+    heroElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    });
 });
-
-/**
- * エラーハンドリング
- * 予期しないエラーをキャッチして適切に処理
- */
-window.addEventListener('error', function(e) {
-    console.warn('Portfolio site error:', e.error);
-    // 本番環境では適切なエラー報告サービスに送信することを推奨
-});
-
-/**
- * アクセシビリティ向上のための機能
- * キーボードナビゲーションのサポート
- */
-document.addEventListener('keydown', function(e) {
-    // Tabキーでのフォーカス移動時の視覚的フィードバック向上
-    if (e.key === 'Tab') {
-        document.body.classList.add('keyboard-navigation');
-    }
-});
-
-document.addEventListener('mousedown', function() {
-    document.body.classList.remove('keyboard-navigation');
-});
-
-// キーボードナビゲーション用のCSS（動的に追加）
-const keyboardNavStyle = document.createElement('style');
-keyboardNavStyle.textContent = `
-    .keyboard-navigation *:focus {
-        outline: 2px solid var(--accent-color-1) !important;
-        outline-offset: 2px !important;
-    }
-`;
-document.head.appendChild(keyboardNavStyle);
